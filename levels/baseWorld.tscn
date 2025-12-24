@@ -1,0 +1,30 @@
+[gd_scene load_steps=4 format=3 uid="uid://bntgvkdxcd06n"]
+
+[ext_resource type="PackedScene" uid="uid://bpiofrvpp86xr" path="res://player/PlayerShip.tscn" id="1_3se6j"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_b8dc0"]
+
+[sub_resource type="CameraAttributesPhysical" id="CameraAttributesPhysical_1aowq"]
+
+[node name="BaseWorld" type="Node3D"]
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(4.45959, 0, 0, 0, 4.45959, 0, 0, 0, 4.45959, 24.6584, -1.09815, -24.1726)
+mesh = SubResource("BoxMesh_b8dc0")
+
+[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
+transform = Transform3D(4.45959, 0, 0, 0, 4.45959, 0, 0, 0, 4.45959, 5.52016, -2.31233, -11.356)
+mesh = SubResource("BoxMesh_b8dc0")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
+transform = Transform3D(7.82254, 0, 0, 0, 7.82254, 0, 0, 0, 7.82254, 42.0304, -11.6846, -2.61683)
+mesh = SubResource("BoxMesh_b8dc0")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+camera_attributes = SubResource("CameraAttributesPhysical_1aowq")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(0.777245, -0.230704, -0.585377, 0, 0.930354, -0.366664, 0.629198, 0.284987, 0.723112, 0, -5.52453, 3.3195)
+
+[node name="player" parent="." instance=ExtResource("1_3se6j")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.54884, 0, -1.68447)

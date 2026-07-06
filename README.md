@@ -1,2 +1,2 @@
-# SpaceRougeLike
-space sim rouge like
+# SpaceRogueLike
+space sim rogue like

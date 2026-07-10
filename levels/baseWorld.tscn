@@ -20,6 +20,22 @@ mesh = SubResource("BoxMesh_b8dc0")
 transform = Transform3D(7.82254, 0, 0, 0, 7.82254, 0, 0, 0, 7.82254, 42.0304, -11.6846, -2.61683)
 mesh = SubResource("BoxMesh_b8dc0")
 
+[node name="MeshInstance3D4" type="MeshInstance3D" parent="."]
+transform = Transform3D(7.82254, 0, 0, 0, 1675.5765, 0, 0, 0, 1419.6068, 1410.6914, -11.6846, -2.61683)
+mesh = SubResource("BoxMesh_b8dc0")
+
+[node name="MeshInstance3D5" type="MeshInstance3D" parent="."]
+transform = Transform3D(7.82254, 0, 0, 0, 1675.5765, 0, 0, 0, 1419.6068, -768.3882, -11.6846, -2.61683)
+mesh = SubResource("BoxMesh_b8dc0")
+
+[node name="MeshInstance3D6" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.13043764, 0, -2594.969, 0, 1675.5768, 0, 7.7118573, 0, 43.89108, 261.79956, -11.6846, 561.7817)
+mesh = SubResource("BoxMesh_b8dc0")
+
+[node name="MeshInstance3D7" type="MeshInstance3D" parent="."]
+transform = Transform3D(0.13043764, 0, -2594.969, 0, 1675.5768, 0, 7.7118573, 0, 43.89108, 261.79956, -11.6846, -754.16876)
+mesh = SubResource("BoxMesh_b8dc0")
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 camera_attributes = SubResource("CameraAttributesPhysical_1aowq")
 

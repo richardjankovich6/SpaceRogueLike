@@ -39,31 +39,62 @@ func _input(event: InputEvent) -> void:
 		transform.basis = Basis();
 		rotate_object_local(Vector3(0, -1, 0), screen_x_rotate)
 		rotate_object_local(Vector3(0, 0, -1), screen_y_rotate)
-		return
+		#return
 		
 		
 	if event.is_action("break"):
-		var new_velocity = linear_velocity
-		linear_velocity
-		linear_velocity = Vector3.ZERO
-		return
-	
-	#print("processing input")
-	if event.is_action("move_right"):
-		pending_impules.z += 1
-	elif event.is_action("move_left"):
-		pending_impules.z -= 1
-	elif event.is_action("move_back"):
-		pending_impules.x += 1
-	elif event.is_action("move_forward"):
-		pending_impules.x += 1
-	elif event.is_action("move_up"):
-		pending_impules.y += 1
-	elif event.is_action("move_down"):
-		pending_impules.y -= 1
+
+		var break_rate : Vector3
+		
+		if abs(linear_velocity.x) >= acceleration_rate.x:
+			break_rate.x = -1 if _isPositive(linear_velocity.x) else 1
+		else:
+			linear_velocity.x = 0
+			break_rate.x = 0
+			print("zero x")
+		if abs(linear_velocity.y) >= acceleration_rate.y:
+			break_rate.y = -1 if _isPositive(linear_velocity.y) else 1
+		else:
+			linear_velocity.y = 0
+			break_rate.y = 0
+			print("zero y")
+		if abs(linear_velocity.z) >= acceleration_rate.z:
+			break_rate.z = -1 if _isPositive(linear_velocity.z) else 1
+		else:
+			linear_velocity.z = 0
+			break_rate.z = 0
+			print("zero z")
+			
+		pending_impules = break_rate
+		print(break_rate)
+		#pending_impules = transform.basis * pending_impules
+		#linear_velocity += pending_impules * acceleration_rate
+#
+		#pending_impules = Vector3.ZERO
+		#return
+		
+		#linear_velocity - 
+		#linear_velocity
+		#linear_velocity = Vector3.ZERO
+	else:
+		if event.is_action("move_right"):
+			pending_impules.z += 1
+		elif event.is_action("move_left"):
+			pending_impules.z -= 1
+		elif event.is_action("move_backward"):
+			pending_impules.x -= 1
+		elif event.is_action("move_forward"):
+			pending_impules.x += 1
+		elif event.is_action("move_up"):
+			pending_impules.y += 1
+		elif event.is_action("move_down"):
+			pending_impules.y -= 1
 		
 	pending_impules = transform.basis * pending_impules
 	
 	linear_velocity += pending_impules * acceleration_rate
 
 	pending_impules = Vector3.ZERO
+	
+func _isPositive(value: float) -> bool:
+	return value >= 0

@@ -43,39 +43,25 @@ func _input(event: InputEvent) -> void:
 		
 		
 	if event.is_action("break"):
-
-		var break_rate : Vector3
 		
 		if abs(linear_velocity.x) >= acceleration_rate.x:
-			break_rate.x = -1 if _isPositive(linear_velocity.x) else 1
+			pending_impules.x = -1 if _isPositive(linear_velocity.x) else 1
 		else:
 			linear_velocity.x = 0
-			break_rate.x = 0
-			print("zero x")
+			pending_impules.x = 0
+			
 		if abs(linear_velocity.y) >= acceleration_rate.y:
-			break_rate.y = -1 if _isPositive(linear_velocity.y) else 1
+			pending_impules.y = -1 if _isPositive(linear_velocity.y) else 1
 		else:
 			linear_velocity.y = 0
-			break_rate.y = 0
-			print("zero y")
+			pending_impules.y = 0
+			
 		if abs(linear_velocity.z) >= acceleration_rate.z:
-			break_rate.z = -1 if _isPositive(linear_velocity.z) else 1
+			pending_impules.z = -1 if _isPositive(linear_velocity.z) else 1
 		else:
 			linear_velocity.z = 0
-			break_rate.z = 0
-			print("zero z")
+			pending_impules.z = 0
 			
-		pending_impules = break_rate
-		print(break_rate)
-		#pending_impules = transform.basis * pending_impules
-		#linear_velocity += pending_impules * acceleration_rate
-#
-		#pending_impules = Vector3.ZERO
-		#return
-		
-		#linear_velocity - 
-		#linear_velocity
-		#linear_velocity = Vector3.ZERO
 	else:
 		if event.is_action("move_right"):
 			pending_impules.z += 1

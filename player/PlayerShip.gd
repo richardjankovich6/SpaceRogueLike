@@ -27,43 +27,19 @@ func _process(delta: float) -> void:
 
 func _input(event: InputEvent) -> void:
 	
-	#var delta: float = get_process_delta_time()
-	
 	var pending_impules: Vector3 = Vector3.ZERO
 	
 	if event.is_action("quit"):
 		get_tree().quit()
 		
 	if event.is_action("break"):
-		var current_velocity = transform.basis * linear_velocity
-		#var current_velocity = linear_velocity
-		
-		#for i in range (linear_velocity.length() - 1):
+		var current_velocity: Vector3 = transform.basis * linear_velocity
 		for i in range (3):
-			#var curr: float = abs(linear_velocity[i])
 			if abs(linear_velocity[i]) >= acceleration_rate[i]:
 				pending_impules[i] = -1 if current_velocity[i] >= 0 else 1
 			else:
 				linear_velocity[i] = 0
 				pending_impules[i] = 0
-		
-		#if abs(linear_velocity.x) >= acceleration_rate.x:
-			#pending_impules.x = -1 if _isPositive(current_velocity.x) else 1
-		#else:
-			#linear_velocity.x = 0
-			#pending_impules.x = 0
-			#
-		#if abs(linear_velocity.y) >= acceleration_rate.y:
-			#pending_impules.y = -1 if _isPositive(current_velocity.y) else 1
-		#else:
-			#linear_velocity.y = 0
-			#pending_impules.y = 0
-			#
-		#if abs(linear_velocity.z) >= acceleration_rate.z:
-			#pending_impules.z = -1 if _isPositive(current_velocity.z) else 1
-		#else:
-			#linear_velocity.z = 0
-			#pending_impules.z = 0
 			
 	else:
 		if event.is_action("move_right"):
@@ -81,10 +57,6 @@ func _input(event: InputEvent) -> void:
 		
 	pending_impules = transform.basis * (pending_impules * acceleration_rate)
 	linear_velocity += pending_impules
-
-	
-	
-	
 
 func _handleMouseInput(delta: float) -> void:
 	var mouse_velocity = Input.get_last_mouse_screen_velocity()
@@ -107,8 +79,3 @@ func _handleMouseInput(delta: float) -> void:
 	#Input.action_press("break")
 	
 	#Input.
-	
-	
-	
-func _isPositive(value: Variant) -> bool:
-	return value >= 0

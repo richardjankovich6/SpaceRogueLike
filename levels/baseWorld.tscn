@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://bntgvkdxcd06n"]
 
-[ext_resource type="PackedScene" uid="uid://bpiofrvpp86xr" path="res://player/PlayerShip.tscn" id="1_3se6j"]
+[ext_resource type="PackedScene" uid="uid://twhy1wdyyqfa" path="res://player/Player.tscn" id="2_g0pnl"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_b8dc0"]
 
@@ -48,5 +48,5 @@ transform = Transform3D(-0.30280268, 0.34944957, 0.88667667, 0.9307062, -0.09186
 light_color = Color(0.7326765, 0.6716618, 0.5970884, 1)
 light_energy = 0.64
 
-[node name="player" parent="." instance=ExtResource("1_3se6j")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.54884, 0, -1.68447)
+[node name="Player" parent="." instance=ExtResource("2_g0pnl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1.8434173, 0, -2.7153306)

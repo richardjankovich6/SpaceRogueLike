@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://twhy1wdyyqfa"]
+
+[ext_resource type="PackedScene" uid="uid://bpiofrvpp86xr" path="res://player/PlayerShip.tscn" id="2_wnvi2"]
+[ext_resource type="PackedScene" uid="uid://clalcnl5x711c" path="res://player/Camera.tscn" id="3_wnvi2"]
+
+[node name="Player" type="Node3D"]
+
+[node name="PlayerShip" parent="." instance=ExtResource("2_wnvi2")]
+
+[node name="Camera" parent="." instance=ExtResource("3_wnvi2")]

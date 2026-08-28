@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://clalcnl5x711c"]
+
+[node name="Camera" type="Node3D"]
+
+[node name="CameraGimbal" type="Node3D" parent="."]
+
+[node name="InnerGimgal" type="Node3D" parent="CameraGimbal"]
+
+[node name="Camera3D" type="Camera3D" parent="CameraGimbal/InnerGimgal"]
+transform = Transform3D(-4.34454e-08, 0.11015065, -0.9939149, 4.814838e-09, 0.9939149, 0.11015065, 1, 0, -4.371139e-08, -5, 0, 0)
+rotation_order = 0
+keep_aspect = 0
+v_offset = 1.0
+current = true

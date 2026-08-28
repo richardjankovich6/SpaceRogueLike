@@ -8,20 +8,29 @@
 script = ExtResource("1_hjfnf")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(3.5, 0, 0, 0, 0.7, 0, 0, 0, 1, 0, 0.25, 0)
+transform = Transform3D(3.5, 0, 0, 0, 0.7, 0, 0, 0, 1, 0, 0, 0)
 gi_mode = 2
 mesh = SubResource("BoxMesh_p8vag")
 
 [node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(2.5, 0, 0, 0, 0.327661, -0.573576, 0, 0.229431, 0.819152, -0.4, 0.1, 0.85)
+transform = Transform3D(2.5, 0, 0, 0, 0.327661, -0.573576, 0, 0.229431, 0.819152, -0.7736287, -0.06615343, 0.85)
 gi_mode = 2
 mesh = SubResource("BoxMesh_p8vag")
 
 [node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(2.5, 0, 0, 0, 0.327661, 0.573576, 0, -0.229431, 0.819152, -0.4, 0.1, -0.85)
+transform = Transform3D(2.5, 0, 0, 0, 0.327661, 0.573576, 0, -0.229431, 0.819152, -0.7736287, -0.06615343, -0.85)
 gi_mode = 2
 mesh = SubResource("BoxMesh_p8vag")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(-4.37114e-08, 0, -1, 0, 1, 0, 1, 0, -4.37114e-08, -3, 1.5, 0)
+[node name="CenterOfMass" type="Node3D" parent="."]
+
+[node name="CameraGimbal" type="Node3D" parent="CenterOfMass"]
+
+[node name="InnerGimgal" type="Node3D" parent="CenterOfMass/CameraGimbal"]
+
+[node name="Camera3D" type="Camera3D" parent="CenterOfMass/CameraGimbal/InnerGimgal"]
+transform = Transform3D(-4.34454e-08, 0.11015065, -0.9939149, 4.814838e-09, 0.9939149, 0.11015065, 1, 0, -4.371139e-08, -5, 0, 0)
+rotation_order = 0
+keep_aspect = 0
+v_offset = 1.0
 current = true

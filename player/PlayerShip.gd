@@ -32,31 +32,24 @@ func _enter_tree() -> void:
 	#constant_force += pending_impules
 	#pending_impules = Vector3.ZERO
 
-#func _process(delta: float) -> void:
-	#var mouse_velocity = Input.get_last_mouse_screen_velocity()
-	#var mouse_velocity = Input.get_last_mouse_velocity()
-	#
-	#var dx = mouse_velocity.x
-	#var dy = mouse_velocity.y
+func _process(delta: float) -> void:
+	
+	_handleMouseInput(delta)
+	
+	var parent: Node3D = get_parent_node_3d()
+	if parent != null:
+		parent.transform = parent.transform.translated(linear_velocity * delta)
 
-	#if abs(dx) > 0: # Only rotate when the mouse moves a certain distance
-		#rotation.z -= dx * rotation_speed * delta / 10
-		#rotation.z = clamp(rotation.z, -360, 360)
-#
-	#if abs(dy) > 0:
-		#rotation.y += dy * rotation_speed * delta
-		#rotation.y = clamp(rotation.y, -360, 360)
-	#rotation.x = 0
 
 
 func _input(event: InputEvent) -> void:
 	
-	var delta: float = get_process_delta_time()
+	#var delta: float = get_process_delta_time()
 	
 	if event.is_action("quit"):
 		get_tree().quit()
 	
-	if event is InputEventMouseMotion and event.button_mask & 1:
+	#if event is InputEventMouseMotion and event.button_mask & 1:
 		
 		#var center = get_viewport().get_visible_rect().size / 2
 		#
@@ -71,8 +64,8 @@ func _input(event: InputEvent) -> void:
 			#rotation.y = clamp(rotation.y, -360, 360)
 		
 		#transform.basis = Basis();
-		rotate_object_local(Vector3(0, -1, 0), event.relative.x * rotation_speed * delta)
-		rotate_object_local(Vector3(0, 0, -1), event.relative.y * rotation_speed * delta)
+		#rotate_object_local(Vector3(0, -1, 0), event.relative.x * rotation_speed * delta)
+		#rotate_object_local(Vector3(0, 0, -1), event.relative.y * rotation_speed * delta)
 		
 		
 	if event.is_action("break"):
@@ -115,9 +108,39 @@ func _input(event: InputEvent) -> void:
 	#pending_impules = transform.basis * pending_impules
 	pending_impules = transform.basis * (pending_impules * acceleration_rate)
 	
-	linear_velocity += pending_impules * delta
+	#linear_velocity += pending_impules * delta * 10
+	linear_velocity += pending_impules
 
 	pending_impules = Vector3.ZERO
+	
+	#if get_parent() is 
+	#get_parent().transform = linear_velocity
+	
+	
+
+func _handleMouseInput(delta: float) -> void:
+	var mouse_velocity = Input.get_last_mouse_screen_velocity()
+	#var mouse_velocity = Input.get_last_mouse_velocity()
+	
+	var dx = mouse_velocity.x
+	var dy = mouse_velocity.y
+
+	if abs(dx) > 0:
+		rotation.z -= dx * rotation_speed * delta / 10
+		rotation.z = clamp(rotation.z, -360, 360)
+
+	if abs(dy) > 0:
+		rotation.y += dy * rotation_speed * delta
+		rotation.y = clamp(rotation.y, -360, 360)
+	rotation.x = 0
+	
+	
+#func _handleFlightInput(delta: float) -> void:
+	#Input.action_press("break")
+	
+	#Input.
+	
+	
 	
 func _isPositive(value: Variant) -> bool:
 	return value >= 0

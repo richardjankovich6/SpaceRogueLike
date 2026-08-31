@@ -4,11 +4,7 @@ extends RigidBody3D
 var using_controller: bool = false
 
 var acceleration_rate : Vector3 = Vector3(15.0, 8, 8)
-
-var screen_x_rotate : float = 0.0
-var screen_y_rotate : float = 0.0
-
-var rotation_speed = 0.005
+var rotation_speed: float = 0.005
 
 func _enter_tree() -> void:
 	gravity_scale = 0

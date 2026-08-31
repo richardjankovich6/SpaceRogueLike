@@ -1,8 +1,8 @@
 extends RigidBody3D
 
-#var pending_impules : Vector3 = Vector3.ZERO
+#var using_controller: bool = true
+var using_controller: bool = false
 
-#var acceleration_rate : Vector3 = Vector3(1.0, 0.5, 0.4)
 var acceleration_rate : Vector3 = Vector3(15.0, 8, 8)
 
 var screen_x_rotate : float = 0.0
@@ -12,7 +12,10 @@ var rotation_speed = 0.005
 
 func _enter_tree() -> void:
 	gravity_scale = 0
-	Input.mouse_mode = Input.MOUSE_MODE_CAPTURED
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
+	
+	#Input.joy_connection_changed()
+	#Input.is_joy_known()
 
 
 func _process(delta: float) -> void:
@@ -24,8 +27,6 @@ func _process(delta: float) -> void:
 	var parent: Node3D = get_parent_node_3d()
 	if parent != null:
 		parent.transform = parent.transform.translated(linear_velocity * delta)
-
-
 
 func _input(event: InputEvent) -> void:
 	return
@@ -91,23 +92,31 @@ func _handleVelocityInput(delta: float) -> void:
 			pending_impules.y -= 1
 		
 	pending_impules = transform.basis * (pending_impules * acceleration_rate)
-	#linear_velocity += pending_impules
 	linear_velocity += pending_impules * delta
 
 func _handleRotationInput(delta: float) -> void:
-	var mouse_velocity = Input.get_last_mouse_screen_velocity()
+	
+	var yaw_delta: float
+	var pitch_delta: float
+	var roll_delta: float = 0
+	
+	if using_controller:
+		yaw_delta = 0
+		pitch_delta = 0
+		
+	else:
+		var mouse_velocity = Input.get_last_mouse_screen_velocity()
+		yaw_delta = mouse_velocity.x
+		pitch_delta = mouse_velocity.y
 	
 	# rotation has z=pitch, y=yaw, x=roll
 	
-	var dx: float = mouse_velocity.x
-	var dy: float = mouse_velocity.y
-
-	if abs(dy) > 0: # adjust pitch
-		rotation.z -= dy * rotation_speed * delta / 10
-		rotation.z = clamp(rotation.z, -360, 360)
-
-	if abs(dx) > 0: # adjust yaw
-		rotation.y -= dx * rotation_speed * delta
+	if abs(roll_delta) > 0: # adjust roll
+		rotation.x -= roll_delta * rotation_speed * delta
+		rotation.x = clamp(rotation.x, -360, 360)
+	if abs(yaw_delta) > 0: # adjust yaw
+		rotation.y -= yaw_delta * rotation_speed * delta
 		rotation.y = clamp(rotation.y, -360, 360)
-		
-	#rotation.x = 0
+	if abs(pitch_delta) > 0: # adjust pitch
+		rotation.z -= pitch_delta * rotation_speed * delta / 10
+		rotation.z = clamp(rotation.z, -360, 360)

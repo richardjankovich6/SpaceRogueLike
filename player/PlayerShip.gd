@@ -17,9 +17,9 @@ func _enter_tree() -> void:
 
 func _process(delta: float) -> void:
 	
-	_handleMouseInput(delta)
+	_handleRotationInput(delta)
 	
-	_handleThrustInput(delta)
+	_handleVelocityInput(delta)
 	
 	var parent: Node3D = get_parent_node_3d()
 	if parent != null:
@@ -61,7 +61,7 @@ func _input(event: InputEvent) -> void:
 	pending_impules = transform.basis * (pending_impules * acceleration_rate)
 	linear_velocity += pending_impules
 
-func _handleThrustInput(delta: float) -> void:
+func _handleVelocityInput(delta: float) -> void:
 	var pending_impules: Vector3 = Vector3.ZERO
 	
 	if Input.is_action_pressed("quit"):
@@ -94,7 +94,7 @@ func _handleThrustInput(delta: float) -> void:
 	#linear_velocity += pending_impules
 	linear_velocity += pending_impules * delta
 
-func _handleMouseInput(delta: float) -> void:
+func _handleRotationInput(delta: float) -> void:
 	var mouse_velocity = Input.get_last_mouse_screen_velocity()
 	
 	# rotation has z=pitch, y=yaw, x=roll

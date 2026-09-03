@@ -1,11 +1,11 @@
 [gd_scene load_steps=3 format=3 uid="uid://bpiofrvpp86xr"]
 
-[ext_resource type="Script" uid="uid://ch5e6rifrg356" path="res://player/PlayerShip.gd" id="1_hjfnf"]
+[ext_resource type="Script" uid="uid://06cdpy7dc6tl" path="res://ship/ship.gd" id="1_c7a8p"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_p8vag"]
 
-[node name="PlayerShip" type="RigidBody3D"]
-script = ExtResource("1_hjfnf")
+[node name="Ship" type="RigidBody3D"]
+script = ExtResource("1_c7a8p")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(3.5, 0, 0, 0, 0.7, 0, 0, 0, 1, 0, 0, 0)

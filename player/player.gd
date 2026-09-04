@@ -1,25 +1,16 @@
-
-#res://ship/ship.gd
-
-#class_name Ship
-
 extends Node
-#class Player:
-	
-	
-	
-	
-	#"res://ship/ship.gd"
-	#include("res://ship/ship.gd")
-	
-	
-var ship : RigidBody3D
 
+@onready var ship : RigidBody3D = $PlayerShip
+#var using_controller : bool = false
+var using_controller : bool = true
+
+#var JOY_ROTATION_SENSITIVITY: float = 150
+var joy_rotation_sensitivity: float = 150
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	ship = $PlayerShip
-	pass # Replace with function body.
+	#ship = $PlayerShip
+	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -27,6 +18,12 @@ func _process(delta: float) -> void:
 	_handleRotationInput()
 	_handleImpulseInput()
 	#transform = transform.translated(ship.linear_velocity * delta)
+	
+func _input(event: InputEvent) -> void:
+	#if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
+		#using_controller = false
+	pass
+	
 
 func _handleImpulseInput() -> void:
 	var pending_impulse: Vector3 = Vector3.ZERO
@@ -58,11 +55,18 @@ func _handleRotationInput() -> void:
 	var pitch_delta: float
 	var roll_delta: float
 
-	#if using_controller:
-	if false:
+	if using_controller:
+		#Input.get_vector("roll_left", "roll_right", "yaw_left", "yaw_right", "pitch_down", "pitch_up")
+		#var rot = Input.get_vector("roll_left", "roll_right", "pitch_down", "pitch_up") * 100
+		#var rot = Input.get_vector("pitch_up",  "pitch_down", "roll_right", "roll_left") * 100
+		# TODO
+		# magic number makes it playable, remove later
+		#var rot = Input.get_vector("pitch_up",  "pitch_down", "yaw_left", "yaw_right") * 150
+		#print(rot)
+		#roll_delta = Input.get_axis("roll_left", "roll_right") * joy_rotation_sensitivity
 		roll_delta = 0
-		yaw_delta = 0
-		pitch_delta = 0
+		yaw_delta = Input.get_axis("yaw_left", "yaw_right") * joy_rotation_sensitivity
+		pitch_delta = Input.get_axis("pitch_up",  "pitch_down") * joy_rotation_sensitivity
 		
 	else:
 		roll_delta = 0

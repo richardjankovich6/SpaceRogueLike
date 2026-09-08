@@ -1,8 +1,9 @@
-extends Node
+extends Node3D
 
 @onready var ship : RigidBody3D = $PlayerShip
-#var using_controller : bool = false
-var using_controller : bool = true
+@onready var camera : Node3D = $Camera
+var using_controller : bool = false
+#var using_controller : bool = true
 
 #var JOY_ROTATION_SENSITIVITY: float = 150
 var joy_rotation_sensitivity: float = 150
@@ -13,16 +14,32 @@ func _ready() -> void:
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
 
 
+
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	#_handleRotationInput()
+	#_handleImpulseInput()
+	#transform = transform.translated(ship.linear_velocity * delta)
+	pass
+	
+func _physics_process(delta: float) -> void:
 	_handleRotationInput()
 	_handleImpulseInput()
-	#transform = transform.translated(ship.linear_velocity * delta)
 	
+	#transform.translated(ship.get_position())
+	#ship.set_position(Vector3.ZERO)
+
 func _input(event: InputEvent) -> void:
 	#if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:
 		#using_controller = false
-	pass
+		
+	
+	if event.is_action_pressed("boost"):
+		ship.activate_boost()
+		camera.activate_boost()
+	if event.is_action_released("boost"):
+		ship.deactivate_boost()
+		camera.deactivate_boost()
 	
 
 func _handleImpulseInput() -> void:

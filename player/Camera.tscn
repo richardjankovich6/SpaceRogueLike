@@ -7,8 +7,8 @@
 [node name="InnerGimgal" type="Node3D" parent="CameraGimbal"]
 transform = Transform3D(0.9759434, 0.21802402, 0, -0.21802402, 0.9759434, 0, 0, 0, 1, 0, 0, 0)
 
-[node name="Camera3D" type="Camera3D" parent="CameraGimbal/InnerGimgal"]
-transform = Transform3D(-4.34454e-08, 0.11015065, -0.9939149, 4.814838e-09, 0.9939149, 0.11015065, 1, 0, -4.371139e-08, -5, 0, 0)
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(-4.1350503e-08, 0.32419813, -0.9459892, 1.417115e-08, 0.9459892, 0.32419813, 1, 8.881784e-16, -4.371139e-08, -4.879717, 1.0901201, 0)
 rotation_order = 0
 keep_aspect = 0
 v_offset = 1.0

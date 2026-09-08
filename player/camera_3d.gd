@@ -4,9 +4,15 @@ extends Node3D
 var playerShip: RigidBody3D
 static var cameraOffset: Vector3 = Vector3(4, 1, 0)
 
+var boost_active : bool = false
+func activate_boost() -> void:
+	boost_active = true
+func deactivate_boost() -> void:
+	boost_active = false
+
 func _ready() -> void:
 	playerShip = get_parent_node_3d().get_child(0)
 
 func _process(delta: float) -> void:
 	set_rotation(playerShip.rotation)
-	#delta
+	set_position(playerShip.position)

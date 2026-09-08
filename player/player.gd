@@ -17,15 +17,11 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	#_handleRotationInput()
-	#_handleImpulseInput()
-	#transform = transform.translated(ship.linear_velocity * delta)
 	pass
 	
 func _physics_process(delta: float) -> void:
 	_handleRotationInput()
 	_handleImpulseInput()
-	
 	#transform.translated(ship.get_position())
 	#ship.set_position(Vector3.ZERO)
 

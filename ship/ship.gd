@@ -57,6 +57,7 @@ func _physics_process(delta: float) -> void:
 
 
 func applyBreak() -> void:
+	#TODO still bugging out sometimes
 	var current_velocity: Vector3 = transform.basis * linear_velocity
 	for i in range (3):
 		if abs(linear_velocity[i]) >= acceleration_rate[i] / 60:

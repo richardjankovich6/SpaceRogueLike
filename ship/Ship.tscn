@@ -1,25 +1,40 @@
-[gd_scene load_steps=3 format=3 uid="uid://bpiofrvpp86xr"]
+[gd_scene load_steps=5 format=3 uid="uid://bpiofrvpp86xr"]
 
 [ext_resource type="Script" uid="uid://06cdpy7dc6tl" path="res://ship/ship.gd" id="1_c7a8p"]
+[ext_resource type="PackedScene" uid="uid://dgwvr41h7suug" path="res://weapon/Weapon.tscn" id="2_j84o1"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_p8vag"]
+size = Vector3(3.5, 0.7, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_j84o1"]
+size = Vector3(2.5, 0.4, 1)
 
 [node name="Ship" type="RigidBody3D"]
 script = ExtResource("1_c7a8p")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(3.5, 0, 0, 0, 0.7, 0, 0, 0, 1, 0, 0, 0)
+[node name="Body" type="MeshInstance3D" parent="."]
 gi_mode = 2
 mesh = SubResource("BoxMesh_p8vag")
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="."]
-transform = Transform3D(2.5, 0, 0, 0, 0.327661, -0.573576, 0, 0.229431, 0.819152, -0.7736287, -0.06615343, 0.85)
+[node name="StarboardWing" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 0.8191517, -0.5735769, 0, 0.5735769, 0.8191517, -0.7736287, -0.06615343, 0.85)
 gi_mode = 2
-mesh = SubResource("BoxMesh_p8vag")
+mesh = SubResource("BoxMesh_j84o1")
+skeleton = NodePath("../..")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="."]
-transform = Transform3D(2.5, 0, 0, 0, 0.327661, 0.573576, 0, -0.229431, 0.819152, -0.7736287, -0.06615343, -0.85)
+[node name="StarboardLaser" parent="Body/StarboardWing" instance=ExtResource("2_j84o1")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 1.333, 0, 0)
+
+[node name="PortWing" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 0.8191517, 0.5735769, 0, -0.5735769, 0.8191517, -0.7736287, -0.06615343, -0.85)
 gi_mode = 2
-mesh = SubResource("BoxMesh_p8vag")
+mesh = SubResource("BoxMesh_j84o1")
+skeleton = NodePath("../..")
+
+[node name="PortLaser" parent="Body/PortWing" instance=ExtResource("2_j84o1")]
+transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 1.333, 0, 0)
+
+[node name="TargetingPoint" type="RayCast3D" parent="Body"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 1.8325166, 0, 0)
 
 [node name="CenterOfMass" type="Node3D" parent="."]

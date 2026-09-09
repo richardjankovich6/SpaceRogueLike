@@ -1,0 +1,25 @@
+[gd_scene load_steps=4 format=3 uid="uid://dgwvr41h7suug"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_3xllt"]
+size = Vector3(1, 0.5, 0.8)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gtfc4"]
+albedo_color = Color(0.45490196, 0.5529412, 0.5254902, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3xllt"]
+top_radius = 0.12
+bottom_radius = 0.1
+height = 0.3
+
+[node name="Weapon" type="Node3D"]
+
+[node name="Body" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_3xllt")
+surface_material_override/0 = SubResource("StandardMaterial3D_gtfc4")
+
+[node name="Barrel" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0.6, 0, 0)
+mesh = SubResource("CylinderMesh_3xllt")
+
+[node name="Emitter" type="Node3D" parent="Body/Barrel"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -7.0137904e-09, -0.16045672, 0)

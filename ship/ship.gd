@@ -46,7 +46,7 @@ func _physics_process(delta: float) -> void:
 	_handlePendingImpulse(delta)
 	
 	
-	print(boost_active)
+	#print(boost_active)
 	
 	
 	#if parent != null:

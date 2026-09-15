@@ -60,18 +60,16 @@ func _physics_process(delta: float) -> void:
 
 func firePrimaryWeapons() -> void:
 	if targetCast.is_colliding():
-		var target = targetCast.get_collider()
-		if target.is_in_group("shootable"):
-			print("hit enemy ", target)
-			for weapon in primaryWeaponsGroup:
-				weapon.fire()
+		var collisionPoint = targetCast.get_collision_point()
+		for weapon in primaryWeaponsGroup:
+			weapon.fire(collisionPoint)
 
 func fireSecondaryWeapons() -> void:
 	if targetCast.is_colliding():
-		var target = targetCast.get_collider()
-		if target.is_in_group("shootable"):
-			for weapon in secondaryWeaponsGroup:
-				weapon.fire()
+		var collisionPoint = targetCast.get_collision_point()
+		for weapon in secondaryWeaponsGroup:
+			weapon.fire(collisionPoint)
+			
 
 func applyBreak() -> void:
 	#TODO still bugging out sometimes

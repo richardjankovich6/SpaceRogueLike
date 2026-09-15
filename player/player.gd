@@ -10,20 +10,25 @@ var joy_rotation_sensitivity: float = 150
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
-	#ship = $PlayerShip
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED)
-
-
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pass
+	#print(targetingCast)
 	
+	if Input.is_action_just_pressed("firePrimary"):
+		ship.firePrimaryWeapons()
+		#if targetingCast.is_colliding():
+			#var target = targetingCast.get_collider()
+			#if target.is_in_group("shootable"):
+				#print("hit enemy ", target)
+				#target.health -= damage
+	if Input.is_action_just_pressed("fireSecondary"):
+		ship.fireSecondaryWeapons()
+
 func _physics_process(delta: float) -> void:
 	_handleRotationInput()
 	_handleImpulseInput()
-	#transform.translated(ship.get_position())
-	#ship.set_position(Vector3.ZERO)
 
 func _input(event: InputEvent) -> void:
 	#if event is InputEventMouseMotion and Input.get_mouse_mode() == Input.MOUSE_MODE_CAPTURED:

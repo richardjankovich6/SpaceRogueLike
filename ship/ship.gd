@@ -15,7 +15,8 @@ func set_pending_impulse(InImpulse: Vector3) -> void:
 func get_pending_impulse() -> Vector3:
 	return pending_impulse
 
-var acceleration_rate : Vector3 = Vector3(15.0, 8, 8)
+#var acceleration_rate : Vector3 = Vector3(15.0, 8, 8)
+var acceleration_rate : Vector3 = Vector3(250, 120, 75)
 
 var rotation_rate : Vector3 = Vector3(0.001, 0.005, 0.008)
 # rotation has x=roll, y=yaw, z=pitch
@@ -30,25 +31,26 @@ func deactivate_boost() -> void:
 
 var parent:Node3D = null
 
+@onready var targetCast: RayCast3D = $Body/TargetingCast
+
+var primaryWeaponsGroup: Array
+var secondaryWeaponsGroup: Array
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	gravity_scale = 0
 	parent = get_parent_node_3d()
+	primaryWeaponsGroup.append($Body/StarboardWing/StarboardLaser)
+	primaryWeaponsGroup.append($Body/PortWing/PortLaser)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	pass
-	#test
 
 func _physics_process(delta: float) -> void:
 	_handlePendingRotation(delta)
 	_handlePendingImpulse(delta)
-	
-	
-	#print(boost_active)
-	
-	
 	#if parent != null:
 		#parent.transform = parent.transform.translated(constant_force)
 		#parent.transform = parent.transform.translated(constant_force * delta)
@@ -56,6 +58,20 @@ func _physics_process(delta: float) -> void:
 		#parent.transform = transform.basis * get_global_position()
 		#parent.set_global_position(transform.basis * get_position())
 
+func firePrimaryWeapons() -> void:
+	if targetCast.is_colliding():
+		var target = targetCast.get_collider()
+		if target.is_in_group("shootable"):
+			print("hit enemy ", target)
+			for weapon in primaryWeaponsGroup:
+				weapon.fire()
+
+func fireSecondaryWeapons() -> void:
+	if targetCast.is_colliding():
+		var target = targetCast.get_collider()
+		if target.is_in_group("shootable"):
+			for weapon in secondaryWeaponsGroup:
+				weapon.fire()
 
 func applyBreak() -> void:
 	#TODO still bugging out sometimes
@@ -74,12 +90,12 @@ func _handlePendingImpulse(delta: float) -> void:
 	if (boost_active):
 		transformed_impulse = transformed_impulse * boost_ratio
 	
-	apply_central_force(transform.basis * (pending_impulse * acceleration_rate))
+	apply_central_force(transformed_impulse * delta)
 	pending_impulse = Vector3.ZERO
 
 func _handlePendingRotation(delta: float) -> void:
 	
-	" rotation has x=roll, y=yaw, z=pitch "
+	#" rotation has x=roll, y=yaw, z=pitch "
 	if abs(pending_rotation.x) > 0: # adjust roll
 		rotation.x = clamp(rotation.x - (pending_rotation.x * rotation_rate.x * delta), -PI, PI)
 	if abs(pending_rotation.y) > 0: # adjust yaw
@@ -90,7 +106,5 @@ func _handlePendingRotation(delta: float) -> void:
 			rotation.y = clamp(rotation.y + (pending_rotation.y * rotation_rate.y * delta), -PI, PI)
 	if abs(pending_rotation.z) > 0: # adjust pitch
 		rotation.z = clamp(rotation.z - (pending_rotation.z * rotation_rate.z * delta), -PI, PI)
-		#rotation.z = clamp(rotation.z - (pending_rotation.z * rotation_rate.z * delta), -PI/2, PI/2)
-		
-	#print(rotation)
+	
 	pending_rotation = Vector3.ZERO

@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://bsch5h8aolg2l"]
+
+[ext_resource type="Script" uid="uid://d1to22bgk13mp" path="res://weapon/target/bad_guy.gd" id="1_8ujpu"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_gwrc4"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_gwrc4"]
+
+[node name="BadGuy" type="StaticBody3D" groups=["shootable"]]
+script = ExtResource("1_8ujpu")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_gwrc4")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("BoxMesh_gwrc4")
+skeleton = NodePath("")

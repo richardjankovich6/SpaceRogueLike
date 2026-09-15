@@ -1,4 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://dgwvr41h7suug"]
+[gd_scene load_steps=5 format=3 uid="uid://dgwvr41h7suug"]
+
+[ext_resource type="Script" uid="uid://npvn7destslc" path="res://weapon/weapon.gd" id="1_gtfc4"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_3xllt"]
 size = Vector3(1, 0.5, 0.8)
@@ -12,6 +14,7 @@ bottom_radius = 0.1
 height = 0.3
 
 [node name="Weapon" type="Node3D"]
+script = ExtResource("1_gtfc4")
 
 [node name="Body" type="MeshInstance3D" parent="."]
 mesh = SubResource("BoxMesh_3xllt")

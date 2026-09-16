@@ -2,8 +2,8 @@ extends Node3D
 
 @onready var ship : RigidBody3D = $PlayerShip
 @onready var camera : Node3D = $Camera
-var using_controller : bool = false
-#var using_controller : bool = true
+#var using_controller : bool = false
+var using_controller : bool = true
 
 #var JOY_ROTATION_SENSITIVITY: float = 150
 var joy_rotation_sensitivity: float = 150

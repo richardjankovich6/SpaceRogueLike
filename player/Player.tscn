@@ -1,14 +1,23 @@
-[gd_scene load_steps=5 format=3 uid="uid://twhy1wdyyqfa"]
+[gd_scene load_steps=6 format=3 uid="uid://twhy1wdyyqfa"]
 
 [ext_resource type="Script" uid="uid://b8rne41ve4pvk" path="res://player/player_controller.gd" id="1_83hs8"]
 [ext_resource type="Script" uid="uid://4hrivx5ee5e5" path="res://player/camera_3d.gd" id="2_3c3w1"]
 [ext_resource type="PackedScene" uid="uid://bpiofrvpp86xr" path="res://ship/Ship.tscn" id="2_wnvi2"]
 [ext_resource type="PackedScene" uid="uid://clalcnl5x711c" path="res://player/Camera.tscn" id="3_wnvi2"]
+[ext_resource type="PackedScene" uid="uid://iwlpamd20oko" path="res://addons/customizableCrosshair/crosshair/crosshair.tscn" id="5_x8kxw"]
 
 [node name="Player" type="Node3D"]
 script = ExtResource("1_83hs8")
 
 [node name="PlayerShip" parent="." instance=ExtResource("2_wnvi2")]
+
+[node name="Crosshair" parent="PlayerShip" instance=ExtResource("5_x8kxw")]
+offset_top = -154.0
+offset_bottom = -154.0
+use_top_left = true
+crosshairSize = 15.0
+crosshairColor = Color(1, 1, 1, 1)
+crosshairOutline = true
 
 [node name="Camera" parent="." instance=ExtResource("3_wnvi2")]
 script = ExtResource("2_3c3w1")

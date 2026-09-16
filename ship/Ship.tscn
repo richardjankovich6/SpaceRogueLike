@@ -36,6 +36,6 @@ transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 1.333, 0, 0)
 
 [node name="TargetingCast" type="RayCast3D" parent="Body"]
 transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 1.8325166, 0, 0)
-target_position = Vector3(0, 300, 0)
+target_position = Vector3(0, 1000, 0)
 
 [node name="CenterOfMass" type="Node3D" parent="."]

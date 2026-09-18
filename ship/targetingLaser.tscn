@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://bqxlgyg134gwc"]
+
+[ext_resource type="Script" uid="uid://b7cln583cjod1" path="res://ship/targeting_laser.gd" id="1_133ea"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_3sinb"]
+top_radius = 0.1
+bottom_radius = 0.1
+height = 0.01
+radial_segments = 16
+cap_top = false
+cap_bottom = false
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_133ea"]
+transparency = 1
+albedo_color = Color(0.16706741, 0.4094861, 9.62615e-08, 0.19607843)
+emission_enabled = true
+emission = Color(0.23133928, 0.5376362, 5.7756904e-07, 1)
+emission_energy_multiplier = 16.0
+
+[node name="TargetingLaser" type="Node3D"]
+script = ExtResource("1_133ea")
+
+[node name="RayCast3D" type="RayCast3D" parent="."]
+target_position = Vector3(1, 0, 0)
+
+[node name="LaserBeam" type="MeshInstance3D" parent="RayCast3D"]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0, 0)
+mesh = SubResource("CylinderMesh_3sinb")
+surface_material_override/0 = SubResource("StandardMaterial3D_133ea")

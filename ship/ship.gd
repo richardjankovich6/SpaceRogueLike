@@ -40,8 +40,8 @@ var secondaryWeaponsGroup: Array
 func _ready() -> void:
 	gravity_scale = 0
 	parent = get_parent_node_3d()
-	primaryWeaponsGroup.append($Body/StarboardWing/StarboardLaser)
-	primaryWeaponsGroup.append($Body/PortWing/PortLaser)
+	primaryWeaponsGroup.append($Body/StarboardLaser)
+	primaryWeaponsGroup.append($Body/PortLaser)
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
@@ -63,6 +63,13 @@ func firePrimaryWeapons() -> void:
 		var collisionPoint = targetCast.get_collision_point()
 		for weapon in primaryWeaponsGroup:
 			weapon.fire(collisionPoint)
+	else:
+		#targetCast.target_position.y
+		#to_global(Vector3(0, targetCast.target_position.y, 0))
+		for weapon in primaryWeaponsGroup:
+			weapon.fire(to_global(Vector3(0, targetCast.target_position.y, 0)))
+			#weapon.fire(collisionPoint)
+			#weapon.isFiring = true
 
 func fireSecondaryWeapons() -> void:
 	if targetCast.is_colliding():

@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bpiofrvpp86xr"]
+[gd_scene load_steps=6 format=3 uid="uid://bpiofrvpp86xr"]
 
 [ext_resource type="Script" uid="uid://06cdpy7dc6tl" path="res://ship/ship.gd" id="1_c7a8p"]
 [ext_resource type="PackedScene" uid="uid://dgwvr41h7suug" path="res://weapon/Weapon.tscn" id="2_j84o1"]
+[ext_resource type="PackedScene" uid="uid://bqxlgyg134gwc" path="res://ship/targetingLaser.tscn" id="3_65u0o"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_p8vag"]
 size = Vector3(3.5, 0.7, 1)
@@ -22,20 +23,24 @@ gi_mode = 2
 mesh = SubResource("BoxMesh_j84o1")
 skeleton = NodePath("../..")
 
-[node name="StarboardLaser" parent="Body/StarboardWing" instance=ExtResource("2_j84o1")]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 1.333, 0, 0)
-
 [node name="PortWing" type="MeshInstance3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 0.8191517, 0.5735769, 0, -0.5735769, 0.8191517, -0.7736287, -0.06615343, -0.85)
 gi_mode = 2
 mesh = SubResource("BoxMesh_j84o1")
 skeleton = NodePath("../..")
 
-[node name="PortLaser" parent="Body/PortWing" instance=ExtResource("2_j84o1")]
-transform = Transform3D(0.4, 0, 0, 0, 0.4, 0, 0, 0, 0.4, 1.333, 0, 0)
-
 [node name="TargetingCast" type="RayCast3D" parent="Body"]
 transform = Transform3D(-4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 0, 1, 1.8325166, 0, 0)
-target_position = Vector3(0, 1000, 0)
+target_position = Vector3(0, 500, 0)
+debug_shape_custom_color = Color(0.42352942, 0.3529412, 1, 1)
+
+[node name="PortLaser" parent="Body" instance=ExtResource("2_j84o1")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 1.75, -0.175, -0.325)
+
+[node name="StarboardLaser" parent="Body" instance=ExtResource("2_j84o1")]
+transform = Transform3D(0.8, 0, 0, 0, 0.8, 0, 0, 0, 0.8, 1.75, -0.175, 0.325)
+
+[node name="TargetingLaser" parent="Body" instance=ExtResource("3_65u0o")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.7564584, 0, -0.002760291)
 
 [node name="CenterOfMass" type="Node3D" parent="."]

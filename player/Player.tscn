@@ -12,6 +12,7 @@ script = ExtResource("1_83hs8")
 [node name="PlayerShip" parent="." instance=ExtResource("2_wnvi2")]
 
 [node name="Crosshair" parent="PlayerShip" instance=ExtResource("5_x8kxw")]
+visible = false
 offset_top = -154.0
 offset_bottom = -154.0
 use_top_left = true

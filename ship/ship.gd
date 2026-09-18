@@ -16,9 +16,9 @@ func get_pending_impulse() -> Vector3:
 	return pending_impulse
 
 #var acceleration_rate : Vector3 = Vector3(15.0, 8, 8)
-var acceleration_rate : Vector3 = Vector3(250, 120, 75)
+var acceleration_rate : Vector3 = Vector3(2500, 250, 400)
 
-var rotation_rate : Vector3 = Vector3(0.001, 0.005, 0.008)
+var rotation_rate : Vector3 = Vector3(0.001, 0.015, 0.02)
 # rotation has x=roll, y=yaw, z=pitch
 
 var boost_ratio : Vector3 = Vector3(2, 2, 2)
